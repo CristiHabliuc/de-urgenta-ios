@@ -15,6 +15,8 @@ struct MainNavigation: View {
             switch environment.navigationRoute {
             case .public:
                 HomeView()
+            case .pendingVerification:
+                EmailValidationView()
             case .authenticated:
                 DashboardView()
             }

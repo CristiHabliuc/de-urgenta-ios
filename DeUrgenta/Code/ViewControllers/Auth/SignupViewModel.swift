@@ -8,6 +8,7 @@
 import Foundation
 import Promises
 
+@available(*, deprecated, message: "Not using in favor of SwiftUI. Kept for reference until full migration")
 class SignupViewModel: NSObject {
     enum FieldType {
         case email

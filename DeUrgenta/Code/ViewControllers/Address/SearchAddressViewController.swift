@@ -9,6 +9,7 @@ import UIKit
 import NMAKit
 import SnapKit
 
+@available(*, deprecated, message: "Not using in favor of SwiftUI. Kept for reference until full migration")
 class SearchAddressViewController: DUViewController {
     
     let model = SearchAddressViewModel()

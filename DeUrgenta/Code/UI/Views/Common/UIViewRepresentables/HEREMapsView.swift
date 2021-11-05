@@ -31,17 +31,6 @@ struct HEREMapsView: UIViewRepresentable {
         mapView.copyrightLogoPosition = .topRight
         mapView.zoomLevel = stateModel.zoom
         mapView.tilt = stateModel.tilt
-        if let center = stateModel.geoCenter {
-            mapView.set(geoCenter: center, animation: .none)
-            if stateModel.showsPin,
-               let pinMarker = stateModel.mapPinMarker {
-                mapView.add(mapObject: pinMarker)
-            }
-        }
-        
-        if !stateModel.showsPin || stateModel.geoCenter == nil {
-            mapView.removeAllMapObjects()
-        }
 
         return mapView
     }
@@ -49,6 +38,20 @@ struct HEREMapsView: UIViewRepresentable {
     func updateUIView(_ mapView: NMAMapView, context: Context) {
         // Update map scheme which might get changed by Picker selection
         mapView.mapScheme = mapScheme
+        mapView.zoomLevel = stateModel.zoom
+        mapView.tilt = stateModel.tilt
+        if let center = stateModel.geoCenter {
+            mapView.set(geoCenter: center, animation: .none)
+            if stateModel.showsPin,
+               let pinMarker = stateModel.mapPinMarker {
+                mapView.removeAllMapObjects()
+                mapView.add(mapObject: pinMarker)
+            }
+        }
+        
+        if !stateModel.showsPin || stateModel.geoCenter == nil {
+            mapView.removeAllMapObjects()
+        }
     }
 
     func makeCoordinator() -> Coordinator {
@@ -99,7 +102,7 @@ struct HEREMapsView_Previews: PreviewProvider {
 #endif
 
 class GlobalMapStateModel : ObservableObject {
-    @Published var zoom: Float = 20
+    @Published var zoom: Float = 8
     @Published var tilt: Float = 0
 
     @Published var geoCenter: NMAGeoCoordinates?

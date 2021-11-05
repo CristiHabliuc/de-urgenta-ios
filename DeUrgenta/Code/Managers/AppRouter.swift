@@ -7,6 +7,7 @@
 
 import UIKit
 
+@available(*, deprecated, message: "Not using in favor of SwiftUI. Kept for reference until full migration")
 class AppRouter: NSObject {
     static let shared = AppRouter()
     
@@ -24,24 +25,24 @@ class AppRouter: NSObject {
     }
     
     func navigateToAppEntry() {
-        let root = AppEntryViewController()
-        mainNavigation.setViewControllers([root], animated: false)
-        let window = UIApplication.shared.keyWindow
-        window?.rootViewController = mainNavigation
+//        let root = AppEntryViewController()
+//        mainNavigation.setViewControllers([root], animated: false)
+//        let window = UIApplication.shared.keyWindow
+//        window?.rootViewController = mainNavigation
     }
     
     func navigateToDashboard() {
-        let root = InfoConfigurationViewController()
-        mainNavigation.setViewControllers([root], animated: false)
-        let window = UIApplication.shared.keyWindow
-        window?.rootViewController = mainNavigation
+//        let root = InfoConfigurationViewController()
+//        mainNavigation.setViewControllers([root], animated: false)
+//        let window = UIApplication.shared.keyWindow
+//        window?.rootViewController = mainNavigation
     }
     
     func navigateToUnauthenticated() {
-        let root = WelcomeViewController()
-        mainNavigation.setViewControllers([root], animated: false)
-        let window = UIApplication.shared.keyWindow
-        window?.rootViewController = mainNavigation
+//        let root = WelcomeViewController()
+//        mainNavigation.setViewControllers([root], animated: false)
+//        let window = UIApplication.shared.keyWindow
+//        window?.rootViewController = mainNavigation
     }
     
     func push(_ vc: DUViewController, animated: Bool = true, to nav: UINavigationController? = nil) {

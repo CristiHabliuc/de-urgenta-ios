@@ -16,6 +16,7 @@ extension LoginView {
         
         @Published var isLoading = false
         @Published var isLoggedIn = false
+        
         @Published var errorMessage: String?
         @Published var isError = false
 

@@ -8,6 +8,7 @@
 import UIKit
 import Promises
 
+@available(*, deprecated, message: "Not using in favor of SwiftUI. Kept for reference until full migration")
 class LoginViewController: DUViewController {
     let model = OLoginViewModel()
     

@@ -11,7 +11,7 @@ struct EmailValidationView: View {
     var body: some View {
         VStack {
             Spacer()
-                .frame(height: 60)
+                .frame(height: 30)
             
             HStack {
                 Image.envelopeIconLarge
@@ -20,7 +20,7 @@ struct EmailValidationView: View {
             }
 
             Spacer()
-                .frame(height: 44)
+                .frame(height: 54)
 
             HStack {
                 BigTitleLabel(title: "Validează-ți contul")
@@ -39,7 +39,13 @@ struct EmailValidationView: View {
         }
         .foregroundColor(.regularText)
         .padding()
-        .navigationBarHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(leading: Button(action: {
+            MainAppEnvironment.shared.navigationRoute = .public
+        }, label: {
+            Image(systemName: "xmark")
+                .foregroundColor(.mainForeground)
+        }))
     }
 }
 

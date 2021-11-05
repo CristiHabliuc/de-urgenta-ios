@@ -27,6 +27,7 @@ extension AddressEntryView {
         var selectedLocation: MapManager.MapLocation? {
             didSet {
                 canSave = selectedLocation != nil && !userAddress.isEmpty
+                var mapState = self.mapState
                 if let location = selectedLocation?.location {
                     let geoCenter = NMAGeoCoordinates(
                         latitude: location.latitude,
@@ -34,9 +35,12 @@ extension AddressEntryView {
                     )
                     mapState.geoCenter = geoCenter
                     mapState.showsPin = true
+                    mapState.zoom = 20
                 } else {
                     mapState.showsPin = false
+                    mapState.zoom = 8
                 }
+                self.mapState = mapState
             }
         }
         var userAddress: String { selectedLocation?.address ?? "" }
@@ -79,8 +83,9 @@ extension AddressEntryView {
                     
                 } receiveValue: { [self] query in
                     search(query: query)
-                        .catch { [weak self] error in
-                            self?.currentErrorMessage = "Nu am putut efectua căutarea: \(error.localizedDescription)"
+                        .catch { error in
+                            LogDebug("Nu am putut efectua căutarea: \(error.localizedDescription)")
+//                            self?.currentErrorMessage = "Nu am putut efectua căutarea: \(error.localizedDescription)"
                         }
                 }
                 .store(in: &subscription)
@@ -91,7 +96,6 @@ extension AddressEntryView {
                 longitude: geoCenterLocation.longitude
             )
             mapState.geoCenter = geoCenter
-            mapState.zoom = 20
         }
         
         func search(query: String) -> Promise<()> {
@@ -157,8 +161,34 @@ extension AddressEntryView {
                 }
                 .catch { [weak self] error in
                     self?.isLocating = false
-                    self?.currentErrorMessage = error.localizedDescription
+                    // ignore the error
+//                    self?.currentErrorMessage = error.localizedDescription
                 }
+        }
+        
+        func save() {
+            
+        }
+        
+        func saveLocalAddress() {
+            guard let location = selectedLocation else {
+                currentErrorMessage = "Selectează o adresă"
+                return
+            }
+            do {
+                let storedLocation = StoredLocation(context: LocalStorage.shared.moc)
+                storedLocation.address = currentAddressText
+                storedLocation.latitude = location.location.latitude
+                storedLocation.longitude = location.location.longitude
+                let storedAddress = StoredAddress(context: LocalStorage.shared.moc)
+                storedAddress.location = storedLocation
+                storedAddress.addressType = "home"
+                storedAddress.name = currentAddressText
+                // TODO: attach it to the user
+                try LocalStorage.shared.save()
+            } catch {
+                
+            }
         }
         
     }
@@ -211,7 +241,7 @@ class AddressLocalisationAdapter: NSObject {
         )
         LogDebug("found coordinate: \(c2d)")
         
-//        NMAPositioningManager.sharedInstance().stopPositioning()
+        NMAPositioningManager.sharedInstance().stopPositioning()
 
         MapManager.shared.reverseGeocode(c2d)
             .then { [weak self] location in

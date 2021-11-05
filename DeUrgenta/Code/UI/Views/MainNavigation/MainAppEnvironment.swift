@@ -12,6 +12,7 @@ class MainAppEnvironment: ObservableObject {
     
     enum NavigationRoute {
         case `public`
+        case pendingVerification
         case authenticated
     }
     
