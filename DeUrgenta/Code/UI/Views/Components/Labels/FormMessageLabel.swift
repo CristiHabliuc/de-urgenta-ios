@@ -13,7 +13,9 @@ struct FormMessageLabel: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            Image.checkmark
+            if isSuccess {
+                Image.checkmark
+            }
             
             Text(message)
                 .font(.formMessage)
@@ -32,6 +34,8 @@ struct FormMessageLabel_Previews: PreviewProvider {
                 FormMessageLabel(message: "Adresa ta de domiciliu a fost salvata cu succes.", isSuccess: true)
                 
                 FormMessageLabel(message: "Contul tau a fost validat.", isSuccess: true)
+
+                FormMessageLabel(message: "Ne pare rău, a intervenit o eroare.", isSuccess: false)
 
             }
         }

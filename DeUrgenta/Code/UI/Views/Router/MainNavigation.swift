@@ -2,20 +2,20 @@
 //  MainNavigation.swift
 //  DeUrgenta
 //
-//  Created by Cristi Habliuc on 30.08.2021.
+//  Created by Cristi Habliuc on 11.12.2021.
 //
 
 import SwiftUI
 
 struct MainNavigation: View {
-    @StateObject var environment = MainAppEnvironment.shared
+    @StateObject var context = AppContext.shared
     
     var body: some View {
         NavigationView {
-            switch environment.navigationRoute {
-            case .public:
+            switch context.mainNavigationRootPath {
+            case .welcome:
                 HomeView()
-            case .pendingVerification:
+            case .pendingValidation:
                 EmailValidationView()
             case .authenticated:
                 DashboardView()

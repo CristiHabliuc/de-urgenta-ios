@@ -66,7 +66,7 @@ class SignupViewController: DUViewController {
     private func handleSuccess() {
         isFullscreenSpinnerVisible = false
         LogInfo("Signed up.")
-        AppRouter.shared.navigateToDashboard()
+        OldAppRouter.shared.navigateToDashboard()
     }
     
     private func submit() -> Promise<()> {

@@ -1,5 +1,5 @@
 //
-//  AppRouter.swift
+//  OldAppRouter.swift
 //  DeUrgenta
 //
 //  Created by Cristi Habliuc on 02.04.2021.
@@ -8,8 +8,8 @@
 import UIKit
 
 @available(*, deprecated, message: "Not using in favor of SwiftUI. Kept for reference until full migration")
-class AppRouter: NSObject {
-    static let shared = AppRouter()
+class OldAppRouter: NSObject {
+    static let shared = OldAppRouter()
     
     let mainNavigation = UINavigationController()
     

@@ -23,6 +23,10 @@ extension Color {
     
     static let regularText = Color("RegularText")
 
+    static let formValue = Color("FormValue")
+    
+    static let secondaryButBackground = Color("SecondaryButtonBG")
+    static let secondaryButForeground = Color("SecondaryButtonFG")
 
 }
 

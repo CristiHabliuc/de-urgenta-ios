@@ -103,7 +103,7 @@ extension LoginView {
                     AccountManager.shared.createStoredUserIfNecessary()
                     self?.isLoggedIn = true
                     self?.isLoading = false
-                    MainAppEnvironment.shared.navigationRoute = .authenticated
+                    AppContext.shared.mainNavigationRootPath = .authenticated
                 }
                 .catch { [weak self] error in
                     self?.currentError = ModelError.serverError(reason: error)

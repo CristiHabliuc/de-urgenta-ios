@@ -20,4 +20,8 @@ extension Image {
     
     static let envelopeIconLarge = Image("icon-envelope-large")
     
+    static func addressIcon(for kind: DUAddress.Kind) -> Image {
+        return Image("icon-address-\(kind.rawValue)")
+    }
+    
 }

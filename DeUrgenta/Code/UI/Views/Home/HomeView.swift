@@ -42,7 +42,7 @@ struct HomeView: View {
                 
                 VStack(spacing: 24.0) {
                     NavigationLink(
-                        destination: RegisterView(),
+                        destination: AppRouter.view(for: .register),
                         label: {
                             Text("Înscrie-te acum")
                                 .frame(maxWidth: .infinity)
@@ -51,7 +51,7 @@ struct HomeView: View {
                         .frame(maxWidth: .infinity)
 
                     NavigationLink(
-                        destination: LoginView(),
+                        destination: AppRouter.view(for: .login),
                         label: {
                             Text("Autentifică-te")
                                 .frame(maxWidth: .infinity)

@@ -49,7 +49,7 @@ class LoginViewController: DUViewController {
     private func handleSuccess() {
         isFullscreenSpinnerVisible = false
         LogInfo("Logged in.")
-        AppRouter.shared.navigateToDashboard()
+        OldAppRouter.shared.navigateToDashboard()
     }
     
     private func submit() -> Promise<()> {

@@ -26,6 +26,23 @@ struct DUAddress: Codable {
         case school
         case gym
         case other
+        
+        static var defaultKind: Kind { .home }
+        
+        var description: String {
+            switch self {
+            case .home:
+                return "adresa de domiciliu"
+            case .work:
+                return "adresa de serviciu"
+            case .school:
+                return "adresa școlii"
+            case .gym:
+                return "adresa sălii de sport"
+            case .other:
+                return "altă adresă"
+            }
+        }
     }
     
     var kind: Kind

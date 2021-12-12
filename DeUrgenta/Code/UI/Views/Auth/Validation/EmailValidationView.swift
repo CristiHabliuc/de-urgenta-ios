@@ -41,7 +41,7 @@ struct EmailValidationView: View {
         .padding()
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading: Button(action: {
-            MainAppEnvironment.shared.navigationRoute = .public
+            AppContext.shared.mainNavigationRootPath = .welcome
         }, label: {
             Image(systemName: "xmark")
                 .foregroundColor(.mainForeground)

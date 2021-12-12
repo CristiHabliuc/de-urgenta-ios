@@ -26,7 +26,9 @@ class AppManager: NSObject {
         // Make sure you created the Firebase project and downloaded the GoogleService-Info.plist
         // file into the project folder, or this will fail
         DispatchQueue.main.async {
-            FirebaseApp.configure()
+            if !AppContext.isPreviewMode {
+                FirebaseApp.configure()
+            }
             
             // Make sure you created a Here map account and added the details into your LocalConfig.xcconfig
             MapManager.shared.configure()
@@ -38,14 +40,16 @@ class AppManager: NSObject {
             
             // Load the remote config
             // TODO: load before UI
-            Config.shared.loadRemoteConfig()
-                .then { LogDebug("Loaded remote config") }
-                .catch { LogError("Error while loading remote config: \($0)") }
+            if !AppContext.isPreviewMode {
+                Config.shared.loadRemoteConfig()
+                    .then { LogDebug("Loaded remote config") }
+                    .catch { LogError("Error while loading remote config: \($0)") }
+            }
             
     //        setupAppearance()
             
             if AccountManager.shared.isAuthenticated {
-                MainAppEnvironment.shared.navigationRoute = .authenticated
+                AppContext.shared.mainNavigationRootPath = .authenticated
             }
             
             self.isSetupComplete = true

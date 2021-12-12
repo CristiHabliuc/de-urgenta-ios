@@ -51,7 +51,7 @@ struct DashboardView: View {
                     NavigationLink {
                         switch item.id {
                         case .addresses:
-                            AddressEntryView()
+                            AppRouter.view(for: .addressMap)
                         default:
                             Text("Not handled")
                         }
